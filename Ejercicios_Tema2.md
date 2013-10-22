@@ -27,3 +27,33 @@ Para comprobar que es correcto, abrimos otra terminal con un usuario diferente a
 ![Ejercicio 1 - Foto 2](http://ubuntuone.com/0QrJwgVSklMsXV3xj56SK4)
 
 Y como podemos apreciar no nos deja ver el contenido ya que este solo es accesible desde el espacio de nombres creado al principio del ejercicio. 
+
+## Ejercicio 2
+
+**1. Mostrar los puentes configurados en el sistema operativo.**
+
+Lo primero de todo es instalar el siguiente paquete:
+
+`sudo apt-get install bridge-utils`
+
+A continuación introducimos la siguiente orden y nos dirá los puentes que tiene configurado mi sistema operativo:
+
+`brctl show`
+
+Y como podemos apreciar en la siguiente captura de pantalla, mi sistema operativo no tiene configurado ningún puente.
+
+![Ejercicio 2 - Foto 1](http://ubuntuone.com/4gP3Ivq5G25KuWItpdliQV)
+
+**2. Crear un interfaz virtual y asignarlo al interfaz de la tarjeta wifi, si se tiene, o del fijo, si no se tiene.**
+
+Empezamos creando el puente con la siguiente orden: 
+ 
+`sudo brctl addbr ej2`
+
+A continuación, el puente que acabamos de crear lo asignamos a la tarjeta fija:
+
+`sudo brctl addif ej2 eth0`
+
+y mostramos todas las interfaces que tenemos, viendo la que acabamos de crear, así como los puentes que tenemos configurados: 
+
+![Ejercicio 2 - Foto 2](http://ubuntuone.com/2TV1GwXKhaNzckXM3b6fDY)
