@@ -109,3 +109,78 @@ Abrimos un editor de textos por consola, como nano, y escribimos en él el fiche
 Y un ejemplo de su ejecución se muestra a continuación:
 
 ![Ejercicio 4 - Foto 2](http://ubuntuone.com/3icZUUsNdFSg66ERbYP4Nl)
+
+# Ejercicios del 28-10-2013
+
+## Ejercicio 5
+
+**Instalar una jaula chroot para ejecutar el servidor web de altas prestaciones nginx.**
+
+Para ejecutar nginx, voy a usar el sistema que hemos instalado en el ejercicio 3. Para ello accedemos al sistema con chroot:
+
+`sudo chroot /home/jaulas/quantal`
+
+Ahora vamos a instalar el paquete wget para poder descargarnos el paquete de nginx desde internet:
+
+`apt-get install wget`
+
+Una vez instalado el paquete anterior, ya podemos descargarnos nginx desde internet con la siguiente orden: 
+
+`wget http://nginx.org/download/nginx-1.4.0.tar.gz`
+
+Una vez descargado el paquete lo descomprimimos:
+
+`tar xvzf nginx-1.4.0.tar.gz`
+
+Entramos al directorio y lo configuramos, pero antes instalamos los siguientes paquetes ya que nos lo va a pedir a la hora de configurar el directorio e instalar nginx:
+
+> ```
+> apt-get install gcc 
+> apt-get install libpcre3 libpcre3-dev
+> apt-get install zlib1g-dev
+> apt-get install make
+> ./configure
+> ```
+
+una vez que pongamos todas las ordenes anteriores hacemos un make y un make install para instalar nginx:
+
+> ```
+> make
+> make install
+> ``` 
+
+Ya tenemos instalado nginx en nuestra jaula, solo queda probar su funcionamiento, para ello con la ayuda de curl podemos visualizar contenido de archivos html desde consola. Pedimos que nos muestre el contenido de la página principal del servidor web que acabamos de instalar: 
+
+![Ejercicio 5](http://ubuntuone.com/0tF0SJ7bvlGhLY7yZSK0sI)
+
+## Ejercicio 6
+
+**Crear una jaula y enjaular un usuario usando jailkit, que previamente se habrá tenido que instalar.**
+
+Lo primero que tenemos que hacer es descargarnos el paquete jailkit desde su página web oficial, ya que no tiene paquetes oficiales. 
+
+![Ejercicio 6 - Foto 1](http://ubuntuone.com/5oQS1DisRQeDLnBqcAxuxn)
+
+Una vez descargado el paquete lo descomprimimos y lo instalamos con:
+
+> ```
+> tar -xzvf jailkit-2.16.tar.gz
+> ./configure && make && sudo make install
+> ```
+
+Una vez terminado el proceso anterior, tenemos que crear el sistema de ficheros con permisos para root, tal y como viene en los apuntes de la asignatura:
+
+> ```
+> sudo mkdir -p /seguro/jaulas/dorada
+> sudo chown -R root:root /seguro
+> ```
+
+Ahora vamos a crear la jaula con funcionalidades básicas de shell, editor de textos y herramientas de redes:
+
+`sudo jk_init -v -j /seguro/jaulas/dorada jk_lsh basicshell netutils editors`
+
+Después de haber creado la jaula, debemos crear al usuario que va a estar dentro de la jaula y encerrarlo en dicha jaula:
+
+![Ejercicio 6 - Foto 2](http://ubuntuone.com/7XoytGtpVbN8l4Ynzi8O0m)
+
+Finalmente, solo nos queda darle al usuario que acabamos de enjaular acceso a la shell /bin/bash, ya que este usuario solo tiene acceso a una shell de acceso limitado. Para ello debemos editar el fichero de configuración del usuario que se encuentra en: “/seguro/jaulas/dorada/etc/passwd” y cambiar jk_lsh por /bin/bash
