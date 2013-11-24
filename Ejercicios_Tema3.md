@@ -71,3 +71,39 @@ Si listamos a continuación los contenedores que llevamos creados con la orden `
 Uno en estado ejecutándose, que es el contenedor llamado `fedora12` que lo acabamos de crear y el segundo, que es el contenedor llamado `una-caja` que es el contenedor de Ubuntu utilizado en el punto anterior.
 
 ![Ejercicio 3](http://ubuntuone.com/4unrZrSG4tNegD06Uom60V)
+
+## Ejercicio 4
+
+**1. Instalar lxc-webpanel y usarlo para arrancar, parar y visualizar las máquinas virtuales que se tengan instaladas.**
+
+Para instalar lxc-webpanel tenemos que ser superusuarios e instalarlo con la siguiente orden:
+
+`wget http://lxc-webpanel.github.io/tools/install.sh -O - | bash`
+
+Una vez instalado, abrimos un navegador web y accedemos a él con la siguiente dirección web:
+
+`http://localhost:5000/`
+
+y el usuario y contraseña para acceder a la pagina principal de lxc-webpanel es `admin/admin`
+
+![Ejercicio 4 - Foto 1](http://ubuntuone.com/2dMe6HZiTrI0vozu2KJGCO)
+
+Una vez en la página principal de lxc-webpanel podemos visualizar los contenedores que tenemos y arrancarlos y pararlos a nuestro gusto. 
+Podemos apreciar que tenemos ahora mismo dos contenedores creados, dichos contenedores han sido creados en el ejercicio anterior, y si arrancamos uno podemos apreciar que dicha página cambia ligeramente pasando el contenedor que acabamos de arrancar a estado corriendo.
+
+![Ejercicio 4 - Foto 2](http://ubuntuone.com/4YBGYq6L5IJF2LjLEh0Kj0)
+
+**2. Desde el panel restringir los recursos que pueden usar: CPU shares, CPUs que se pueden usar (en sistemas multinúcleo) o cantidad de memoria.**
+
+Para ello en el menú de la izquierda pinchamos sobre el contenedor al cuál queramos modificarle sus recursos. En mi caso, voy a restringirle los recursos al contenedor de Ubuntu llamado `una-caja`. 
+
+Los recursos que voy a asignarle son: 
+
+* Le voy a limitar la memoria a 1024 MB.
+* La memoria de intercambio más la memoria lo limito al doble de lo anterior, es decir, a 2048 MB. 
+* Le voy a asignar solo una CPU de las dos de las que dispone mi PC, la CPU 1.
+* Además solo va a poder usar el 50% de los recursos de dicha CPU. 
+
+![Ejercicio 4 - Foto 3](http://ubuntuone.com/3xfxGi1EIFrQ2AWmAhFMiv)
+
+Una vez que introduzcamos los cambios, aplicamos dichos cambios. Si ahora arrancamos nuestro contenedor, este ya tendrá los cambios introducidos en dicha página. 
