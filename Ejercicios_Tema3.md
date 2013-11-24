@@ -41,3 +41,33 @@ podemos apreciar como se nos ha creado dos nuevas interfaces que corresponden al
 Y si listamos los puentes con la orden `brctl show` podemos apreciar que nos ha creado un puente de red hacia el contenedor y le ha asignado la interfaz que antes nos salía en última posición.
 
 ![Ejercicio 2 - Foto 4](http://ubuntuone.com/0xtPssPK7gpJUIQje2sVaX)
+
+# Ejercicios del 15-11-2013
+
+## Ejercicio 3
+
+**1. Crear y ejecutar un contenedor basado en Debian.**
+
+La creación y ejecución de dicho contenedor ya se explica en el ejercicio 2. El contenedor utiliza un sistema operativo Ubuntu y se llama una-caja.
+
+**2. Crear y ejecutar un contenedor basado en otra distribución, tal como Fedora.**
+
+Antes de poder crear el contenedor de Fedora tenemos que instalar los siguientes paquetes: `curl` y `yum`. Dichos paquetes se instalan con las siguientes órdenes:
+
+> ```
+> sudo apt-get install curl
+> sudo apt-get install yum 
+> ```
+
+Una vez instalados los paquetes anteriores procedemos a la creación del contenedor con la siguiente orden:
+
+`sudo lxc-create -t fedora -n fedora12 -- -R 12`
+
+Una vez instalado el contenedor de Fedora en su versión 12, accedemos a él con la siguiente orden:
+
+`sudo lxc-start -n fedora12`
+
+Si listamos a continuación los contenedores que llevamos creados con la orden `lxc-list`, podemos apreciar que tenemos dos contenedores. 
+Uno en estado ejecutándose, que es el contenedor llamado `fedora12` que lo acabamos de crear y el segundo, que es el contenedor llamado `una-caja` que es el contenedor de Ubuntu utilizado en el punto anterior.
+
+![Ejercicio 3](http://ubuntuone.com/4unrZrSG4tNegD06Uom60V)
