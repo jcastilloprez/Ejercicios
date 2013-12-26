@@ -310,7 +310,7 @@ y lo lanzamos:
 
 Cuando termine de ejecutarse dicho script, tendremos nuestro contenedor funcionando. 
 
-# Ejercicio 8
+## Ejercicio 8
 
 **Instalar libvirt.**
 
@@ -339,7 +339,7 @@ comando `virsh`.
 
 En dicha shell, podemos crear e interactuar con las distintas máquinas virtuales que creemos con esta librería.
 
-# Ejercicio 9
+## Ejercicio 9
 
 **Instalar un contenedor usando virt-install.**
 
