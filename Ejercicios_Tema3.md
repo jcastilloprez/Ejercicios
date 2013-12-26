@@ -338,3 +338,56 @@ comando `virsh`.
 ![Ejercicio 8 - Foto 3](http://ubuntuone.com/6FVRI1mNw8vWcqhqeJpHHF)
 
 En dicha shell, podemos crear e interactuar con las distintas máquinas virtuales que creemos con esta librería.
+
+# Ejercicio 9
+
+**Instalar un contenedor usando virt-install.**
+
+Lo primero que debemos hacer es instalar el propio **virt-install**, para ello introducimos la siguiente orden:
+
+`sudo apt-get install virtinst`
+
+A continuación instalamos **virt-viewer**, que nos va a permitir interactuar con la máquina virtual a través de una 
+interfaz gráfica, haciéndonos un poco más fácil el trabajo. El paquete lo instalamos con: 
+
+`sudo apt-get install virt-viewer`
+
+El siguiente paso es descargarse una imagen ISO del sistema que vamos a instalar. En mi caso voy a descargarme la ISO de
+Ubuntu Server 12.04.3. Una vez descargada la imagen, procedemos a comenzar la instalación con **virt-install**. Para 
+ello introducimos la siguiente orden:
+
+> ```
+> sudo virt-install -n ubuntuserver -r 512 --disk path=/var/lib/libvirt/images/ubuntuserver.img,bus=virtio,size=5 -c 
+> ubuntu-12.04.3-server-i386.iso --accelerate --network network=default,model=virtio --connect=qemu:///system --vnc 
+> --noautoconsole -v
+> ```
+
+en donde cada una de las opciones significa: 
+
+* **-n**: nombre de la máquina virtual.
+* **-r**: cantidad de memoria RAM en MB que va a utilizar la máquina virtual.  
+* **--disk path=/var/lib/libvirt/images/ubuntuserver.img,bus=virtio,size=5**: la ruta en la que se va a almacenar el 
+disco virtual, el bus que va a utilizar dicho disco y el tamaño en GB que va a tener. 
+* **-c**: imagen ISO que se va a utilizar para instalar el sistema.
+* **--accelerate**: para activar la tecnología de aceleración del kernel.
+* **--network network=default,model=virtio**: la interfaz de red que va a utilizar la máquina virtual y el modelo de la 
+misma. 
+* **--connect=qemu:///system**: el hipervisor al cual se va a conectar. 
+* **--vnc**: para exportar la consola virtual del huésped. 
+* **--noautoconsole**: para evitar que se conecte automáticamente a la consola de la máquina virtual. 
+* **-v**: para crear un huésped totalmente virtualizado. 
+
+![Ejercicio 9 - Foto 1](http://ubuntuone.com/4VRIS1mrLpEFuXgeOW0uvm)
+
+Ahora si listamos las máquinas virtuales existentes con: 
+
+`sudo virsh -c qemu:///system list`
+
+![Ejercicio 9 - Foto 2](http://ubuntuone.com/5N0dszXutbLN4Mk957aEqD)
+
+Podemos apreciar que la máquina se encuentra en estado ejecutando. Para poder continuar con la instalación desde el 
+entorno gráfico, debemos conectarnos a la máquina virtual que acabamos de crear con:
+
+`virt-viewer -c qemu:///system ubuntuserver`
+
+y seguir los pasos hasta terminar de instalar nuestra máquina virtual.
