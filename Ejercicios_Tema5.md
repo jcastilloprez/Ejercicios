@@ -8,7 +8,7 @@
 
 Antes de nada, debemos comprobar que nuestro sistema soporte virtualización con la orden 
 `egrep -c '(vmx|svm)' /proc/cpuinfo` y obtener un valor distinto de 0. También debemos comprobar que el sistema esté 
-preparado para ejecutar **KVM** y no es necesario que nos comformemos con la paravirtualización:
+preparado para ejecutar **KVM** y no es necesario que nos conformemos con la paravirtualización:
 
 ![Ejercicio 1](http://ubuntuone.com/5r6AJaNlc312kYK8BrCFFv)
 
