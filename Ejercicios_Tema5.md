@@ -383,3 +383,28 @@ en donde podemos ver que tanto nginx, como juju-gui se han instalado y funcionan
 
 Ya solamente quedaría configurar nginx dentro de juju para que podamos acceder a la página inicial de nginx desde un 
 navegador web. 
+
+## Ejercicio 7
+
+**Instalar una máquina virtual Ubuntu 12.04 para el hipervisor que tengas instalado.**
+
+Para ello necesitamos tener instalados en nuestro sistema los siguientes paquetes: 
+
+`sudo apt-get install ubuntu-vm-builder kvm virt-manager`
+
+Cuando termine todo el proceso de instalación de los paquetes, usando vmbuilder creamos la imagen con: 
+
+> ```
+> sudo vmbuilder vmw6 ubuntu --suite precise --flavour server --arch i386 -o --dest /home/josemanuel/ubuntu12.04 
+> --hostname ubuntu --domain ubuntu
+> ```
+
+Una vez que se ha creado, procedemos a crearnos una máquina virtual en VirtualBox. Cuando lleguemos al paso en el cual 
+nos da la opción de introducir un disco duro virtual, pulsamos sobre la opción de usar un disco duro virtual existente y 
+le damos el que acabamos de crear. 
+
+![Ejercicio 7 - Foto 1](http://ubuntuone.com/59Cm6WlxgYLnBJfbzRue6o)
+
+Cuando terminemos de crearla, arrancamos la máquina y vemos que podemos acceder a ella: 
+
+![Ejercicio 7 - Foto 2](http://ubuntuone.com/4VbbgMSWSZfuznvPObcCAi)
