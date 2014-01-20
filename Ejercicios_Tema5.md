@@ -209,3 +209,80 @@ Ahora para conectarnos a la máquina virtual a través de SSH, arrancamos la má
 y para conectarnos a ella desde el sistema anfitrión utilizamos: 
 
 `ssh -p 2222 jose@localhost`
+
+## Ejercicio 5
+
+**Crear una máquina virtual Ubuntu e instalar en ella un servidor nginx para poder acceder mediante web.**
+
+Para crear una máquina virtual en Azure debemos saber cuales son las imágenes que tiene esta plataforma disponibles. Para
+ello las listamos con la siguiente orden: 
+
+`azure vm image list`
+
+De todas las que nos ofrece la plataforma, voy a instalar la que se muestra a continuación resaltada:
+
+![Ejercicio 5 - Foto 1](http://ubuntuone.com/6AbZh4IDi9PzOGMDlFhJSy)
+
+Para saber si dicha imagen está disponible o no, utilizamos la siguiente orden para ver los detalles de dicha imagen: 
+
+`azure vm image show b39f27a8b8c64d52b05eac6a62ebad85__Ubuntu-12_04_3-LTS-amd64-server-20131205-en-us-30GB`
+
+![Ejercicio 5 - Foto 2](http://ubuntuone.com/7jyeez9rORN8aJbmPokO0u)
+
+La imagen está disponible, por lo tanto podemos crear dicha máquina virtual. Para su creación utilizamos la siguiente 
+orden: 
+
+> ```
+> azure vm create jcastilloprez b39f27a8b8c64d52b05eac6a62ebad85__Ubuntu-12_04_3-LTS-amd64-server-20131205-en-us-30GB 
+> jose Password --location "West Europe" --ssh
+> ```
+
+![Ejercicio 5 - Foto 3](http://ubuntuone.com/3uOIVWnbzZbFnKy1GsmhXF)
+
+Una vez que ha terminado de crearse, podemos listar todas las máquinas virtuales que tenemos creadas en Azure:
+
+![Ejercicio 5 - Foto 4](http://ubuntuone.com/2fx1qkFYRWl7ACFO7Q6NOd)
+
+y arrancar dicha máquina con: 
+
+![Ejercicio 5 - Foto 5](http://ubuntuone.com/19X67cwFokTl19x1vv8wYq)
+
+Como a la hora de la creación de la máquina hemos indicado la opción de acceso mediante SSH, vamos a conectarnos a la 
+máquina mediante SSH con la siguiente orden:
+
+`ssh jose@jcastilloprez.cloudapp.net`
+
+![Ejercicio 5 - Foto 6](http://ubuntuone.com/2RYfI5nakIuDLw2l3hq2Tu)
+
+Una vez que hemos accedido a la máquina, procedemos a instalar nginx en ella con la siguiente orden:
+
+`sudo apt-get install nginx`
+
+Una vez que termine tendremos instalado nginx en la máquina, pero no podremos acceder desde la web a la página de inicio 
+del servidor. Esto es debido a que no hemos abierto los puertos del servicio HTTP en la máquina y si miramos qué puertos 
+tiene abiertos la máquina podremos ver que solamente tiene abierto el del SSH que le indicamos al crear la máquina: 
+
+![Ejercicio 5 - Foto 7](http://ubuntuone.com/5xet60RLX4NEdpprQFwZzD)
+
+para ello abrimos dicho puerto con la siguiente orden:
+
+`azure vm endpoint create jcastilloprez 80 80`
+
+![Ejercicio 5 - Foto 8](http://ubuntuone.com/34TbtbIg1DNMmTX6VO12N1)
+
+y si volvemos a listar los puertos accesibles, vemos como el puerto de HTTP aparece ya en la lista.
+
+![Ejercicio 5 - Foto 9](http://ubuntuone.com/4gN8FHw9poY2bXCGpFW37a)
+
+Volvemos a la máquina virtual e iniciamos el servidor nginx:
+
+![Ejercicio 5 - Foto 10](http://ubuntuone.com/5SC9pJahx0E0KU45nFoEpE)
+
+Ya solo queda acceder a un navegador e introducir la dirección de la máquina virtual y que este nos muestre la pagina de 
+inicio de nginx.
+
+![Ejercicio 5 - Foto 11](http://ubuntuone.com/3UrTywnPgaUuIVUrubnfji)
+
+Cuando terminemos de usar la máquina virtual de Azure la apagamos:
+
+![Ejercicio 5 - Foto 12](http://ubuntuone.com/2t4fQ1NB35ewM7IZ8S3LhZ)
