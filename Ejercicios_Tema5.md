@@ -286,3 +286,100 @@ inicio de nginx.
 Cuando terminemos de usar la máquina virtual de Azure la apagamos:
 
 ![Ejercicio 5 - Foto 12](http://ubuntuone.com/2t4fQ1NB35ewM7IZ8S3LhZ)
+
+## Ejercicio 6
+
+**Usar juju para hacer el ejercicio anterior.**
+
+Para utilizar juju junto con Azure necesitamos cambiar el fichero de configuración que viene con juju. Dicho fichero se 
+encuentra en  **~/.juju/environments.yaml** y se genera con: 
+
+`sudo juju generate-config`
+
+Abrimos el fichero y debemos modificar la sección correspondiente a Azure, metiéndole nuestros propios valores a las 
+siguientes variables: **management-subscription-id**, **management-certificate-path** y **storage-account-name**. 
+
+En **management-certificate-path** debemos introducir un certificado para el uso de juju, dicho certificado lo generamos 
+con las siguientes ordenes: 
+
+> ```
+> openssl req -x509 -nodes -days 3650 -newkey rsa:2048 -keyout azure.pem -out azure.pem
+> openssl x509 -inform pem -in azure.pem -outform der -out azure.cer
+> chmod 600 azure.pem
+> ```
+
+![Ejercicio 6 - Foto 1](http://ubuntuone.com/5b3MsVgy7rsMjsHEuxBF1s)
+
+ya hemos creado el certificado, por lo tanto, queda decirle en la variable **management-certificate-path** donde se 
+encuentra el archivo **azure.pem** que acabamos de crear y el archivo **azure.cer** subirlo manualmente a la página de 
+Windows Azure:
+
+![Ejercicio 6 - Foto 2](http://ubuntuone.com/4tHVWkt3jO1W4ssq65DaBf)
+
+Para rellenar la variable **management-subscription-id**, que es el identificador de suscripción de nuestra cuenta de 
+Azure, introducimos el valor del campo **Id** que nos proporciona la salida de la siguiente orden: 
+
+`azure account list`
+
+![Ejercicio 6 - Foto 3](http://ubuntuone.com/4QsR3YtDMxIjpDREp0qR5f)
+
+Por último, en la variable **storage-account-name** que es el nombre de una cuenta de almacenamiento, dicha cuenta ya 
+está creada de un ejercicio anterior, introducimos el valor del campo **name** que nos proporciona la salida de la 
+siguiente orden:
+
+`azure account storage list`
+
+![Ejercicio 6 - Foto 4](http://ubuntuone.com/5KYMtjSRCW4buUbmUNkGfJ)
+
+Por lo tanto, el fichero de configuración de juju queda tal que así: 
+
+![Ejercicio 6 - Foto 5](http://ubuntuone.com/2H0WP59mwhVoK5YHYcSvO5)
+
+Ya que hemos realizado la configuración, empezamos por indicarle a juju que va a usar Azure con:
+
+`sudo juju switch azure`
+
+una vez que termine, construimos el entorno con:
+
+`sudo juju bootstrap`
+
+indicamos que se va a emplear el charm `juju-gui`:
+
+`sudo juju deploy --to 0 juju-gui`
+
+y lo exponemos para poder usarlo:
+
+`sudo juju expose juju-gui`
+ 
+Una vez que termine, visualizamos el estado con: 
+
+`sudo juju status`
+
+![Ejercicio 6 - Foto 6](http://ubuntuone.com/1CXyR6n66h2TQQi9d02lRh)
+
+Una vez que ha terminado de crearse, procedemos a añadirle el servidor nginx. Para ello indicamos que al entorno creado 
+anteriormente le vamos a emplear el charm nginx: 
+
+`sudo juju deploy --to 0 cs:~imbrandon/precise/nginx`
+
+lo exponemos: 
+
+`sudo juju expose nginx`
+
+y mostramos el estado con:
+
+`sudo juju status`
+
+![Ejercicio 6 - Foto 7](http://ubuntuone.com/3CUANiYvJSP4j7nFzDZ29S)
+
+y cuando termine podremos ver que se ha instalado correctamente. Otra manera de ver que se ha instalado correctamente es 
+abrir un navegador y acceder a la dirección que nos da. Esta página nos pide que nos registremos, el usuario es 
+**user-admin** y la contraseña es el valor del campo **admin-secret** que se encuentra en el fichero de configuración de 
+juju. Y una vez que accedamos visualizamos la página tal y como se muestra a continuación:
+
+![Ejercicio 6 - Foto 8](http://ubuntuone.com/4TrxnKTgGpzAKQ4NBORNt9)
+
+en donde podemos ver que tanto nginx, como juju-gui se han instalado y funcionan correctamente. 
+
+Ya solamente quedaría configurar nginx dentro de juju para que podamos acceder a la página inicial de nginx desde un 
+navegador web. 
