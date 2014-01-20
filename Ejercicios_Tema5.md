@@ -151,3 +151,61 @@ y una vez que termine de instalarse el Sistema Operativo, tenemos nuestra máqui
 correctamente: 
 
 ![Ejercicio 2 - Foto 22](http://ubuntuone.com/7Mb3UvznwFp0X5GpmtiqK9)
+
+## Ejercicio 4
+
+**Crear una máquina virtual Linux con 512 megas de RAM y entorno gráfico LXDE a la que se pueda acceder mediante VNC y** 
+**ssh.**
+
+La máquina virtual que voy a crear va a tener como Sistema Operativo Lubuntu 12.04, ya que este Sistema Operativo trae el
+entorno gráfico LXDE. 
+
+Para crear dicha máquina virtual con QEMU debemos seguir los mismos pasos que en los ejercicios anteriores. Primeramente 
+creamos el disco duro virtual que va a utilizar la máquina con la siguiente orden:
+
+`qemu-img create -f qcow2 lubuntu.img 10G`
+
+![Ejercicio 4 - Foto 1](http://ubuntuone.com/3dq1lV1opHoG9gxyBHPpzp)
+
+e instalamos la máquina en dicho disco, añadiéndole la opción de que tenga 512M de RAM con la siguiente orden: 
+
+`qemu-system-x86_64 -hda lubuntu.img -cdrom lubuntu-12.04-desktop-i386.iso -m 512M`
+
+![Ejercicio 4 - Foto 2](http://ubuntuone.com/3kwiXyEkmTOlDYqhaLXxdZ)
+
+Cuando termine el proceso de instalación, la arrancamos con la siguiente orden y visualizamos que se acaba de instalar 
+correctamente: 
+
+`qemu-system-x86_64 -boot order=c -drive file=lubuntu.img,if=virtio -m 512M`
+
+![Ejercicio 4 - Foto 3](http://ubuntuone.com/3vm34eh20iT1yAXzKy7B9s)
+
+Para conectarnos a la máquina virtual anterior utilizando el servidor VNC, necesitamos instalar en nuestra máquina 
+anfitriona un cliente VNC. Para ello instalamos el siguiente paquete: 
+
+`sudo apt-get install vinagre`
+
+Ahora para conectarnos a la máquina virtual necesitamos conocer la dirección IP de la interfaz NAT de nuestra máquina 
+para poder utilizar dicho servicio de VNC. Para ello utilizamos el comando `ifconfig` y vemos cual es la dirección IP de 
+dicha interfaz que se llama `virbr0`: 
+
+![Ejercicio 4 - Foto 4](http://ubuntuone.com/5dIKtiEoAGD8AN31sW60nB)
+
+Una vez que sabemos la dirección IP y tenemos instalado el cliente VNC, solo queda arrancar la máquina virtual con la 
+siguiente orden: 
+
+`qemu-system-x86_64 -boot order=c -drive file=lubuntu.img,if=virtio -m 512M -vnc :1`
+
+y conectarnos a la máquina con: 
+
+`vinagre 192.168.122.1:5901`
+
+![Ejercicio 4 - Foto 5](http://ubuntuone.com/38Ov0X6s2sRhrYKrYor7Ek)
+
+Ahora para conectarnos a la máquina virtual a través de SSH, arrancamos la máquina virtual con la siguiente orden:
+
+`qemu-system-x86_64 -boot order=c -drive file=lubuntu.img,if=virtio -m 512M -redir tcp:2222::22`
+
+y para conectarnos a ella desde el sistema anfitrión utilizamos: 
+
+`ssh -p 2222 jose@localhost`
