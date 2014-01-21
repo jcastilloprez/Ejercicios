@@ -252,7 +252,7 @@ máquina mediante SSH con la siguiente orden:
 
 `ssh jose@jcastilloprez.cloudapp.net`
 
-![Ejercicio 5 - Foto 6](http://ubuntuone.com/2RYfI5nakIuDLw2l3hq2Tu)
+![Ejercicio 5 - Foto 6](http://ubuntuone.com/564PoaXpmbBGhD1gSzVK9j)
 
 Una vez que hemos accedido a la máquina, procedemos a instalar nginx en ella con la siguiente orden:
 
@@ -314,7 +314,7 @@ ya hemos creado el certificado, por lo tanto, queda decirle en la variable **man
 encuentra el archivo **azure.pem** que acabamos de crear y el archivo **azure.cer** subirlo manualmente a la página de 
 Windows Azure:
 
-![Ejercicio 6 - Foto 2](http://ubuntuone.com/4tHVWkt3jO1W4ssq65DaBf)
+![Ejercicio 6 - Foto 2](http://ubuntuone.com/2egqbgcYhY3uvcvp4pAZNE)
 
 Para rellenar la variable **management-subscription-id**, que es el identificador de suscripción de nuestra cuenta de 
 Azure, introducimos el valor del campo **Id** que nos proporciona la salida de la siguiente orden: 
