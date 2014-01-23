@@ -7,3 +7,5 @@
 Para instalar **chef** de una manera rápida y sencilla podemos hacer uso del siguiente script:
 
 `curl -L https://www.opscode.com/chef/install.sh | sudo bash`
+
+![Ejercicio 1](http://ubuntuone.com/5iQQed20cSq2v1ml2R2Hb2)
