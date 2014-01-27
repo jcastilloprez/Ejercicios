@@ -411,3 +411,37 @@ Una vez que el ordenador se reinicie y tenga una versión del kernel superior a 
 siguiente script:
 
 `curl -s https://get.docker.io/ubuntu/ | sudo sh`
+
+## Ejercicio 11
+
+**1. Instalar a partir de docker una imagen alternativa de Ubuntu y alguna adicional, por ejemplo de CentOS.**
+
+Para instalar con docker una imagen de Ubuntu solamente necesitamos ejecutar el siguiente comando: 
+
+`sudo docker pull ubuntu`
+
+![Ejercicio 11 - Foto 1](http://ubuntuone.com/1taNlsEvUuQFWu07mdPe9D)
+
+y para instalar la imagen de CentOS:
+
+`sudo docker pull centos`
+
+![Ejercicio 11 - Foto 2](http://ubuntuone.com/3drivoUEP3aoTu3dQyfhcE)
+
+**2. Buscar e instalar una imagen que incluya MongoDB.**
+
+Para instalar una imagen que contenga MongoDB, instalamos la siguiente que viene con el Sistema Operativo de CentOS y 
+dentro de este viene instalado MongoDB: 
+
+`sudo docker pull jonhadfield/mongodb`
+
+![Ejercicio 11 - Foto 3](http://ubuntuone.com/0h4eBfmPS2q23Nxa1jovyd)
+
+Una vez que se acabe de instalar, podemos visualizar cuantas imagenes tenemos instaladas con:
+
+`sudo docker images`
+
+![Ejercicio 11 - Foto 4](http://ubuntuone.com/3zkq3gSc0GsiWmn8vsLWNt)
+
+en donde podemos visualizar las imagenes de Ubuntu y CentOS que instalamos anteriormente, como esta última que acabamos 
+de instalar. 
