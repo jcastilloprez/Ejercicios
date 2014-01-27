@@ -391,3 +391,23 @@ entorno gráfico, debemos conectarnos a la máquina virtual que acabamos de crea
 `virt-viewer -c qemu:///system ubuntuserver`
 
 y seguir los pasos hasta terminar de instalar nuestra máquina virtual.
+
+# Ejercicios del 17-01-2014
+
+## Ejercicio 10
+
+**Instalar docker.**
+
+Para poder trabajar con docker necesitamos tener una versión del kernel superior a la 3.8, si tenemos una más baja, como 
+en mi caso, actualizamos la versión del kernel con los siguientes comandos: 
+
+> ```
+> sudo apt-get update
+> sudo apt-get install linux-image-generic-lts-raring linux-headers-generic-lts-raring
+> sudo reboot 
+> ```
+
+Una vez que el ordenador se reinicie y tenga una versión del kernel superior a la 3.8, instalamos docker ejecutando el 
+siguiente script:
+
+`curl -s https://get.docker.io/ubuntu/ | sudo sh`
