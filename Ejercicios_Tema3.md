@@ -523,3 +523,32 @@ imagen que acabamos de crear.
 `sudo docker images`
 
 ![Ejercicio 13 - Foto 5](http://ubuntuone.com/2WUPxKrkd0cQ2QEFO3tL0p)
+
+## Ejercicio 14
+
+**Crear una imagen con las herramientas necesarias para DAI sobre un sistema operativo de tu elección.**
+
+Para crear una imagen de Ubuntu con todas las herramientas que hemos utilizado a lo largo de toda la asignatura de DAI, 
+necesitamos crear un archivo Dockerfile que cree la imagen e instale todos los paquetes necesarios. 
+
+Por lo tanto, el archivo Dockerfile lo rellenamos tal y como se muestra a continuación: 
+
+![Ejercicio 14 - Foto 1](http://ubuntuone.com/3Na3vh8nZ46tPp4zLe9asR)
+
+y para crear la imagen utilizando dicho fichero utilizamos la siguiente orden:
+
+`sudo docker build .` 
+
+Cuando termine la imagen de crearse, podemos ver como esta aparece en primer lugar y después el resto de imágenes de 
+docker que tenemos creadas: 
+
+`sudo docker images`
+
+![Ejercicio 14 - Foto 2](http://ubuntuone.com/4d5eK9FAzKvcAz5n2h4Rgx)
+
+Comprobamos que la imagen se ha creado correctamente iniciándola a través de su ID y viendo que python está instalado 
+correctamente:
+
+`sudo docker run -i -t 7b04181e0799 /bin/bash`
+
+![Ejercicio 14 - Foto 3](http://ubuntuone.com/2WBVHaAB9ByGzh318X5xKY)
