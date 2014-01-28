@@ -491,3 +491,35 @@ e instalamos nginx con:
 `sudo apt-get install ngnix`
 
 ![Ejercicio 12 - Foto 6](http://ubuntuone.com/6r2B5VmZxZjZraNw5E6TYp)
+
+## Ejercicio 13 
+
+**Crear a partir del contenedor anterior una imagen persistente con commit.**
+
+Para ello primeramente necesitamos obtener la dirección ID larga de nuestro contenedor. Esta la podemos obtener con la 
+siguiente orden: 
+
+`sudo docker ps -notrunc`
+
+![Ejercicio 13 - Foto 1](http://ubuntuone.com/5GH1i1gB9Ha1tkuMJ7dU2Q)
+
+Ahora que sabemos la ID del contenedor, podemos obtener diversa información de dicho contenedor con la siguiente orden:
+
+`sudo docker inspect b96c6fa479afe5bc3d0df1b16292825069b22a68bebe70660b561f99e4d9905d`
+
+![Ejercicio 13 - Foto 2](http://ubuntuone.com/1Wqkao1BSrJsi9yWUVJbeg)
+![Ejercicio 13 - Foto 3](http://ubuntuone.com/1L5cECptXBaTzoOIp0Y8a4)
+
+Y ahora usando la opción commit, con el ID largo de nuestro contenedor y una etiqueta que utilizaremos para 
+identificarlo, crearemos una imagen persistente con el estado actual de nuestro contenedor. 
+
+`sudo docker commit b96c6fa479afe5bc3d0df1b16292825069b22a68bebe70660b561f99e4d9905d nginxCont` 
+
+![Ejercicio 13 - Foto 4](http://ubuntuone.com/2n6EqNlRifOHo1B8Iuhdll)
+
+y si listamos todas las imágenes que tenemos creadas con docker, nos aparecerá con la etiqueta que le hemos asignado la 
+imagen que acabamos de crear. 
+
+`sudo docker images`
+
+![Ejercicio 13 - Foto 5](http://ubuntuone.com/2WUPxKrkd0cQ2QEFO3tL0p)
