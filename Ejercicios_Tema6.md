@@ -67,7 +67,7 @@ En YAML sería de la siguiente manera:
 >           - 11
 > ```
 
-# Ejercicio del 20-01-2014
+# Ejercicios del 20-01-2014
 
 ## Ejercicio 4
 
