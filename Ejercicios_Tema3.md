@@ -445,3 +445,49 @@ Una vez que se acabe de instalar, podemos visualizar cuantas imagenes tenemos in
 
 en donde podemos visualizar las imagenes de Ubuntu y CentOS que instalamos anteriormente, como esta última que acabamos 
 de instalar. 
+
+## Ejercicio 12
+
+**Crear un usuario propio e instalar nginx en el contenedor creado de esta forma.**
+
+Empezamos por iniciar una shell de una imagen de Ubuntu instalada anteriormente:
+
+`sudo docker run -i -t 1a791700f081 /bin/bash`
+
+![Ejercicio 12 - Foto 1](http://ubuntuone.com/3JxGXX6yKvmf4mpWfCG285)
+
+y a través de otra terminal, podemos visualizar que el contenedor con la imagen de Ubuntu se ha creado correctamente:
+
+`sudo docker ps`
+
+![Ejercicio 12 - Foto 2](http://ubuntuone.com/6mO12not6LFvxEJkI0Quk5)
+
+Ya que hemos arrancado el contenedor y vemos que funciona perfectamente, procedemos a crear al usuario y añadirlo al 
+grupo sudo para que también pueda realizar tareas de administración. Para ello seguimos los siguientes pasos: 
+
+> ```
+> useradd -d /home/josedocker -m josedocker
+> passwd josedocker
+> adduser josedocker sudo
+> login josedocker
+> ```
+
+![Ejercicio 12 - Foto 3](http://ubuntuone.com/6nW3yLEKlnCIONOdcIuWRl)
+
+Para instalar nginx necesitamos añadir su repositorio, para ello utilizamos la siguiente orden: 
+
+`sudo add-apt-repository ppa:nginx/stable`
+
+![Ejercicio 12 - Foto 4](http://ubuntuone.com/44uI5rnPJPkrKnAmLBE96W)
+
+Actualizamos los repositorios de Ubuntu con:
+
+`sudo apt-get update`
+
+![Ejercicio 12 - Foto 5](http://ubuntuone.com/6BKQTbidMCCMSUi6ibZ1a4)
+
+e instalamos nginx con:
+
+`sudo apt-get install ngnix`
+
+![Ejercicio 12 - Foto 6](http://ubuntuone.com/6r2B5VmZxZjZraNw5E6TYp)
