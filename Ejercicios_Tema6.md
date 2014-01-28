@@ -66,3 +66,55 @@ En YAML sería de la siguiente manera:
 >           - 10
 >           - 11
 > ```
+
+# Ejercicio del 20-01-2014
+
+## Ejercicio 4
+
+**Desplegar los fuentes de la aplicación de DAI o cualquier otra aplicación que se encuentre en un servidor git público**
+**en la máquina virtual Azure (o una máquina virtual local) usando ansible.**
+
+Empezamos por instalar en la máquina anfitriona Ansible, para ello primero debemos añadir su repositorio con la siguiente
+orden:
+
+`sudo add-apt-repository ppa:rquillo/ansible`
+
+![Ejercicio 4 - Foto 1](http://ubuntuone.com/65YblIy7pdAUWisHijGZzm)
+
+Actualizamos los repositorios con:
+
+`sudo apt-get update`
+
+e instalamos Ansible:
+
+`sudo apt-get install ansible`
+
+Cuando termine la instalación y antes de poder usar Ansible, debemos de crear un fichero con el inventario de todas las 
+máquinas que va a controlar la máquina anfitriona. Dicho archivo se va a llamar **ansible_hosts** y lo rellenamos tal y 
+como se muestra a continuación:
+
+![Ejercicio 4 - Foto 2](http://ubuntuone.com/0KbgVdRYzhNdW44dORak6h)
+
+Como este archivo que acabamos de crear no se encuentra en la ruta por defecto que utiliza Ansible, debemos de 
+indicárselo cambiando el valor de la variable **ANSIBLE_HOSTS**. Una vez que le indiquemos el nuevo camino ya podemos 
+hacer un ping a la máquina virtual de Azure y vemos que nos podemos conectar a ella a través de Ansible.
+
+![Ejercicio 4 - Foto 3](http://ubuntuone.com/4mIzkWd1r3Vpn8YD0wNKyf)
+
+Para poder desplegar nuestra aplicación de DAI que se encuentra en un repositorio de GitHub, debemos de tener instalado 
+el módulo de git en nuestra máquina virtual de Azure. Así que lo instalamos con la siguiente orden:
+
+`sudo apt-get install git`
+
+Cuando se instale ya podemos volver a la máquina anfitriona y usando Ansible desplegar nuestra aplicación de DAI 
+utilizando para ello la siguiente orden: 
+
+`ansible azure -m git --ask-pass -u jose -a “repo=https://github.com/jcastilloprez/DAI.git dest=~/DAI version=HEAD”`
+
+![Ejercicio 4 - Foto 4](http://ubuntuone.com/23sTkc3XUMv7InUEr9SlHs)
+
+Cuando termine, solo nos queda volver a la máquina virtual de Azure y comprobar que nuestra aplicación de DAI se ha 
+desplegado correctamente:
+
+![Ejercicio 4 - Foto 5](http://ubuntuone.com/1wQjWACBMFh4ZBwsvXevIM)
+
