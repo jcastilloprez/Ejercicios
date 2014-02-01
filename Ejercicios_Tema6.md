@@ -118,3 +118,24 @@ desplegado correctamente:
 
 ![Ejercicio 4 - Foto 5](http://ubuntuone.com/1wQjWACBMFh4ZBwsvXevIM)
 
+## Ejercicio 5
+
+**1. Desplegar la aplicación de DAI con todos los módulos necesarios usando un playbook de Ansible.**
+
+Una vez que hemos realizado el ejercicio anterior y tenemos los fuentes de la aplicación de DAI desplegados en nuestra 
+máquina virtual, queda lanzar dicha aplicación. Para ello vamos a hacer uso de un playbook de Ansible, dicho playbook es 
+un fichero en YAML que le indica a la máquina virtual que es lo que necesita instalar para lanzar dicha aplicación. 
+
+Por lo tanto, creamos un playbook llamado **dai.yml** y lo rellenamos tal y como se muestra a continuación: 
+
+![Ejercicio 5 - Foto 1](http://ubuntuone.com/6zAmKQnpwZFcQSssLPlYjM)
+
+Una vez que se ha creado el playbook queda lanzarlo, para ello utilizamos la siguiente orden: 
+
+`ansible-playbook dai.yml --ask-pass -u jose`
+
+![Ejercicio 5 - Foto 2](http://ubuntuone.com/78atF7l5it82dHQSQdHetp)
+
+Una vez que termine el proceso, podemos abrir un navegador y visualizar la aplicación que acabamos de lanzar: 
+
+![Ejercicio 5 - Foto 3](http://ubuntuone.com/2iiy5kT8vxDbaODgx6ml3q)
