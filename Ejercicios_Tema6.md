@@ -139,3 +139,97 @@ Una vez que se ha creado el playbook queda lanzarlo, para ello utilizamos la sig
 Una vez que termine el proceso, podemos abrir un navegador y visualizar la aplicación que acabamos de lanzar: 
 
 ![Ejercicio 5 - Foto 3](http://ubuntuone.com/2iiy5kT8vxDbaODgx6ml3q)
+
+## Ejercicio 6
+
+**Instalar una máquina virtual Debian usando Vagrant y conectar con ella.**
+
+Antes de nada, debemos de instalar Vagrant para poder utilizarlo. Para ello lo instalamos con la siguiente orden: 
+
+`sudo apt-get install vagrant`
+
+o como una gema de Ruby con:
+
+`sudo gem install vagrant`
+
+Una vez que lo instalemos, accedemos a la página de [Vagrant](http://www.vagrantbox.es/) que dispone de un gran listado 
+de máquinas configuradas para Vagrant e instalamos una de Debian. Para ello nos la descargamos con la siguiente orden: 
+
+`vagrant box add squeeze http://mathie-vagrant-boxes.s3.amazonaws.com/debian_squeeze_32.box`
+
+![Ejercicio 6 - Foto 1](http://ubuntuone.com/4iK8BLANzIFYI4TPdJcojd)
+
+Cuando termine de descargarse, la inicializamos con:
+
+`vagrant init squeeze`
+
+![Ejercicio 6 - Foto 2](http://ubuntuone.com/4V2P6JKv7yNzIH493dzCYe)
+
+Con esta ultima orden, acabamos de crear en el directorio actual un fichero llamado **Vagrantfile** que va a ser 
+utilizado para configurar la máquina que acabamos de crear. 
+
+![Ejercicio 6 - Foto 3](http://ubuntuone.com/1xK74lmtxLl5ydMLTNYGpn)
+
+Ya que la hemos descargado, inicializado y visualizado el fichero de configuración de dicha máquina, la arrancamos con: 
+
+`vagrant up`
+
+![Ejercicio 6 - Foto 4](http://ubuntuone.com/6nO3PKIJteRrfhhaFmElEg)
+
+y nos conectamos a ella con:
+
+`vagrant ssh`
+
+![Ejercicio 6 - Foto 5](http://ubuntuone.com/6b6nvmMz81TuONdkY4LWWb)
+
+# Ejercicios del 24-01-2014
+
+## Ejercicio 7
+
+**Crear un script para provisionar Nginx o cualquier otro servidor web que pueda ser útil para alguna otra práctica.**
+
+Voy a utilizar chef para realizar el provisionamiento de Nginx en Vagrant, para ello configuramos chef tal y como vimos 
+en un ejercicio anterior. Una vez que configuremos chef, procedemos a modificar el fichero de configuración de Vagrant y 
+rellenarlo tal y como se muestra a continuación:
+
+![Ejercicio 7 - Foto 1](http://ubuntuone.com/6ayn5tY9jwQIdzoja4bZfS)
+
+y provisionamos dicha máquina con:
+
+`vagrant provision`
+
+![Ejercicio 7 - Foto 2](http://ubuntuone.com/5BY49f0e39KDFSDoa1xPDt)
+
+## Ejercicio 8
+
+**Configurar tu máquina virtual usando Vagrant con el provisionador Ansible.**
+
+Para empezar, debemos irnos al fichero **ansible_hosts** e indicar en dicho fichero la dirección IP de nuestra máquina. 
+
+![Ejercicio 8 - Foto 1](http://ubuntuone.com/1nY9Ly1bu89xYiOqETZ01y)
+
+e indicarle a Ansible que utilice dicho fichero con: 
+
+`export ANSIBLE_HOSTS=~/ansible_hosts`
+
+El siguiente paso es crearnos el playbook que utiliza Ansible para que nos instale en dicha máquina el servidor Nginx con
+el siguiente contenido: 
+
+![Ejercicio 8 - Foto 2](http://ubuntuone.com/0kOjZZhfIphBQhAkPrwgoD)
+
+Una vez que hemos creado el playbook, queda acceder al fichero **Vagrantfile** e insertar la dirección IP que antes hemos
+indicado y que utilice como provisionador Ansible y que instale Nginx utilizando el playbook creado anteriormente. Por 
+tanto, el fichero queda tal que así:
+
+![Ejercicio 8 - Foto 3](http://ubuntuone.com/7bK0cEn3sC4dwDjj44pkmq)
+
+ya solo nos queda provisionar dicha máquina con:
+
+`vagrant provision`
+
+![Ejercicio 8 - Foto 4](http://ubuntuone.com/08r4wEMW9yw4vr7YAqj5cp)
+
+y si accedemos a un navegador con la dirección IP de la máquina virtual, veremos que se ha instalado correctamente el 
+servidor Nginx. 
+
+![Ejercicio 8 - Foto 5](http://ubuntuone.com/25mffA5Oykvx2pZMB8BbN0)
